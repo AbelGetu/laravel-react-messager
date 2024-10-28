@@ -20,12 +20,12 @@ const ConversationItem = ({conversation, selectedConversation = null, online = n
     <Link
         href={conversation.is_group ? route('chat.group', conversation) : route('chat.user', conversation)}
         preserveState
-        className={"conversation-item flex items-center gap-2 p-2 text-grey-300 transition-all cursor-pointer border-1-4 hover:bg-black/30 " + classes + (conversation.is_user && currentUser.is_admin ? "pr-2" : "pr-4")}
+        className={"conversation-item flex items-center gap-2 p-2 text-grey-300 transition-all cursor-pointer border-1-4 dark:text-white hover:bg-black/30 " + classes + (conversation.is_user && currentUser.is_admin ? "pr-2" : "pr-4")}
     >
         {conversation.is_user && (
             <UserAvatar user={conversation} online={online} />
         )}
-        {conversation.is_group ** <GroupAvatar />}
+        {conversation.is_group && <GroupAvatar />}
         <div className={`flex-1 text-xs max-w-full overflow-hidden ` + (conversation.is_user && conversation.blocked_at ? " opacity-50" : "")}>
             <div className='flex gap-1 justify-between items-center'>
                 <h3 className='text-sm font-semibold overflow-hidden text-nowrap text-ellipsis'>{conversation.name}</h3>

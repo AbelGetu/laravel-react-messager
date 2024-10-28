@@ -1,4 +1,6 @@
+import ConversationItem from '@/Components/App/ConversationItem';
 import TextInput from '@/Components/TextInput';
+import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import { usePage } from '@inertiajs/react'
 import React, { useState } from 'react'
 import { useEffect } from 'react';
@@ -13,14 +15,14 @@ const ChatLayout = ({children}) => {
     const [sortedConversations, setSortedConversations] = useState([])
     const [onlineUsers, setOnlineUsers] = useState({})
 
-    const isUserOnline = (userId) => onlineUsers(userId);
+    const isUserOnline = (userId) => onlineUsers[userId];
 
     console.log('conversations', conversations)
     console.log('selectedConversation', selectedConversation)
 
     const onSearch = (e) => {
         const search = e.target.value.toLowerCase();
-        setLocalSortedConversations(
+        setLocalConversations(
             conversations.filter((conversation) => {
                 return conversation.name.toLowerCase().includes(search);
             })
@@ -94,14 +96,14 @@ const ChatLayout = ({children}) => {
     <>
         <div className='flex-1 w-full flex overflow-hidden'>
             <div className={`transition-all w-full sm:w-[220px] md:w-[300px] bg-slate-800 flex flex-col overflow-hidden ${selectedConversation ? '-ml-[100%]' : 'sm:ml-0'} `}>
-                <div className="flex items-center justify-between py-2 px-3 text-xl font-medium">
+                <div className="flex items-center justify-between py-2 px-3 text-xl font-medium text-gray-200">
                     My Conversations
                     <div
                         className='tooltip tooltip-left'
                         data-tip="Create new Group"
                     >
                         <button className="text-grey-400 hover:text-grey-200">
-                            {/* <PencilSquareIcon className='w-4 h-4 inline-block ml-2' /> */}
+                            <PencilSquareIcon className='w-4 h-4 inline-block ml-2' />
                         </button>
                     </div>
                 </div>
